@@ -7,6 +7,8 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 /**
@@ -19,6 +21,37 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping("/api/v1/report")
 public class ReportController {
+
+    @ApiOperation("Посмотреть список отчетов")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 200, message = "Запрос принят"),
+                    @ApiResponse(code = 400, message = "Невалидный запрос"),
+                    @ApiResponse(code = 500, message = "Внутренняя ошибка сервера")
+            })
+    @PostMapping(
+            produces = APPLICATION_JSON_VALUE
+    )
+    public List<ReportDto> get(
+            @RequestParam("pageNumber") Long page,
+            @RequestParam("pageSize") Long countPerPage) {
+        return null;
+    }
+
+    @ApiOperation("Посмотреть отчет")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 200, message = "Запрос принят"),
+                    @ApiResponse(code = 400, message = "Невалидный запрос"),
+                    @ApiResponse(code = 500, message = "Внутренняя ошибка сервера")
+            })
+    @PostMapping(
+            value = "/{id}",
+            produces = APPLICATION_JSON_VALUE
+    )
+    public ReportDto get(@PathVariable("id") Long id) {
+        return null;
+    }
 
     @ApiOperation("Подача отчета")
     @ApiResponses(
@@ -37,7 +70,7 @@ public class ReportController {
 
     }
 
-    @ApiOperation("Подача отчета")
+    @ApiOperation("Обновление отчета")
     @ApiResponses(
             value = {
                     @ApiResponse(code = 200, message = "Запрос принят"),

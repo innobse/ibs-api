@@ -3,6 +3,7 @@ package com.example.demo.controllers;
 import com.example.demo.controllers.dto.EquipmentRequestDto;
 import io.swagger.annotations.*;
 import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
@@ -33,7 +34,9 @@ public class RequestController {
     @GetMapping(
             produces = APPLICATION_JSON_VALUE
     )
-    public List<EquipmentRequestDto> allRequests() {
+    public List<EquipmentRequestDto> allRequests(
+            @RequestParam("pageNumber") @Nullable Long page,
+            @RequestParam("pageSize") @Nullable Long countPerPage) {
         return new ArrayList<>();
     }
 
