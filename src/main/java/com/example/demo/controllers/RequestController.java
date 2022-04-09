@@ -20,7 +20,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  * @since
  */
 @RestController
-@RequestMapping("/api/v1/equipment-request")
+@RequestMapping("/api/v1/equipment")
 public class RequestController {
 
     @ApiOperation("Получение всех заявок на оборудование")
@@ -126,7 +126,6 @@ public class RequestController {
     @PostMapping("/{id}/reject")
     public void reject(
             @PathVariable Long id) {
-
     }
 
 }

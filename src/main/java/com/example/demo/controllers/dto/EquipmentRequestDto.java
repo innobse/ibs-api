@@ -7,6 +7,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
@@ -29,15 +31,17 @@ public class EquipmentRequestDto {
     @JsonProperty
     @ApiModelProperty(
             name = "Идентификатор",
-            example = "fd891389-332b-4f35-b347-549c5f0b1542"
+            example = "12"
     )
-    private UUID id;
+    @NotNull
+    private Integer id;
 
     @JsonProperty
     @ApiModelProperty(
             name = "Наименование оборудования",
             example = "Бур педальный"
     )
+    @NotBlank
     private String title;
 
     @JsonProperty
@@ -45,6 +49,7 @@ public class EquipmentRequestDto {
             name = "Тип оборудования",
             example = "underground-equipment"
     )
+    @NotBlank
     private Type type;
 
     @JsonProperty
@@ -52,15 +57,52 @@ public class EquipmentRequestDto {
             name = "Требуемое количество",
             example = "3"
     )
+    @NotNull
     private Integer amount;
 
     @JsonProperty
     @ApiModelProperty(name = "Дата")
+    @NotNull
     private Date date;
 
     @JsonProperty
     @ApiModelProperty(name = "Обоснование")
+    @NotBlank
     private String comment;
+
+    @JsonProperty
+    @ApiModelProperty(
+            name = "Статус заявки",
+            example = "underground-equipment"
+    )
+    private Status status;
+
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    public enum Status {
+        PENDING("STATUS_PENDING"),
+        REJECT("STATUS_REJECT"),
+        APPROVE("STATUS_APPROVE");
+
+        private static Map<String, Status> FORMAT_MAP = Stream
+                .of(Status.values())
+                .collect(toMap(s -> s.name, Function.<Status>identity()));
+
+        private final String name;
+
+        Status(String name) {
+            this.name = name;
+        }
+
+        @JsonCreator
+        public Status fromString(String string) {
+            Status status = FORMAT_MAP.get(string);
+            if (status == null) {
+                throw new IllegalArgumentException(string + " has no corresponding value");
+            }
+            return status;
+        }
+    }
 
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     public enum Type {

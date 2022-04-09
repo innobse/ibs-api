@@ -7,9 +7,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -22,18 +23,20 @@ import static java.util.stream.Collectors.toMap;
  * Created on 27.03.2022
  * @since
  */
-@ApiModel(value="Credentials", discriminator = "credentials")
-@Schema(name = "Credentials")
-public class AuthDto {
+@ApiModel(value="ApproveEquipmentRequest", discriminator = "approveEquipmentRequestDto")
+@Schema(name = "ApproveEquipmentRequest")
+public class ApproveEquipmentRequestDto {
 
     @JsonProperty
-    @ApiModelProperty(name = "Логин")
-    @NotBlank
-    private String login;
+    @ApiModelProperty(
+            name = "Идентификатор",
+            example = "12"
+    )
+    @NotNull
+    private Integer id;
 
     @JsonProperty
-    @ApiModelProperty(name = "Пароль")
-    @NotBlank
-    private String pass;
-
+    @ApiModelProperty(name = "Дата")
+    @NotNull
+    private Date date;
 }

@@ -48,7 +48,7 @@ public class AuthController {
         Algorithm algo = Algorithm.HMAC256("1234");
         return new TokenDto(
                 JWT.create()
-                        .withSubject("IBS")
+                        .withIssuer("IBS")
                         .withClaim("roles", Collections.singletonList("ROLE_USER"))
                         .withExpiresAt(
                                 new Date(System.currentTimeMillis() + 1000L * 3600))
