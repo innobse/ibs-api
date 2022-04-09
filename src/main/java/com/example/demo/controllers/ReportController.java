@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.http.MediaType.*;
 
 /**
  * Description
@@ -85,6 +85,25 @@ public class ReportController {
             @ApiParam(value = "Report", required = true)
                     ReportDto reportDto) {
 
+    }
+
+    @ApiOperation("Экспорт отчета в файл")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 200, message = "Запрос принят"),
+                    @ApiResponse(code = 400, message = "Невалидный запрос"),
+                    @ApiResponse(code = 500, message = "Внутренняя ошибка сервера")
+            })
+    @PostMapping(
+            value = "download/{id}",
+            produces = APPLICATION_OCTET_STREAM_VALUE
+    )
+    public byte[] get(
+            @PathVariable("id") Long id,
+            @RequestParam("format") String format) {
+
+        //  Здесь допустимы html5 и pdf
+        return null;
     }
 
 }
